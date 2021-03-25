@@ -2,7 +2,7 @@ from hypergraph import hypergraph
 from utils import *
 from loaders import *
 
-N = 3
+N = 4
 
 
 #edges = random_hypergraph(5, 6)
