@@ -3,6 +3,8 @@ An object of class hypergraph is a list of tuples on a specified node set, which
 It is equipped with methods for computing hypergraph moments of interest and running Markov Chain Monte Carlo. 
 '''
 
+from networkx.classes.function import nodes
+from utils import relabel
 import numpy as np
 import networkx as nx
 from collections import Counter 
@@ -326,6 +328,30 @@ class hypergraph:
             arr = arr - 1
             
         return(np.corrcoef(arr.T))[0,1]
+
+    def shuffle_edges(self, p):
+        nodes = self.nodes
+        sub_nodes = list(nodes)[:int(len(nodes)*p/100)]
+        relabel = list(sub_nodes)
+        random.shuffle(relabel)
+        rel = {}
+        for i in range(len(sub_nodes)):
+            rel[sub_nodes[i]] = relabel[i]
+        
+        res = []
+        for e in self.C:
+            if len(e) >= 3:
+                res.append(e)
+            else:
+                E = []
+                for n in e:
+                    if n in rel:
+                        E.append(rel[n])
+                    else:
+                        E.append(n)
+                E = tuple(sorted(E))
+                res.append(E)
+        return res
         
 is_degenerate = lambda x: len(set(x)) < len(x)
 

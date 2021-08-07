@@ -4,11 +4,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 #pacs
-a = [0, 0, 0, 0.48539389488448925, 0, 0]
-a = [0, 0, 0, 3.430109657710983, 0, 0]
+a = [2845.811867846482, 125600.0, 10500.0, -146.6368951114561, 133.17636833093755, -6782.429906542056]
 #gene
-b = [24.15241434774379, 9.346692235101406, 0, -3.5635211304856176, 3.919647479510927, -25.57010162450236]
-b = [164.5240610569368, 0, 0, -6.32693022543493, 9.666666666666664, -180.85399267549136]
+b = [161.23290810197926, 800.0, 0.0, -6.473679678352378, 300.0, -177.23617441483083]
 #high school
 c = [-15.490198605529837, -12.410620954294586, 19.65294014032862, -15.40423222226839, 43.41559716026545, -28.08970076578584]
 c = [-21.26370056450929, 13.351756271215413, 627.605533661354, -29.28535324096598, 93.31642306656465, -55.93042505458853]
@@ -30,9 +28,17 @@ h = [-10.975295853299073, -1.8695203209925157, 82.03462515000787, -3.17770157106
 #babbuini
 j = [-4.909601277515793, -8.491406212215221, 17.83690747413257, -10.531720942189885, 14.28328936948192, -2.1464012781135837]
 j = [-4.565550650202703, -11.62232469743248, 21.270531262016164, -22.788209475586335, 9.948669439051884, -2.848546842553079]
+#ndc-substances
+k = [24.890114351545765, 68.65671641791046, 212.5806451612903, -7.701737397381416, 15.213560813223928, -56.814235623445654]
+#ndc-classes
+l = [3100.0, 100.0, 0.0, -5.158463771723788, 0.0, -3200.0]
+#enron
+m = [-10.51754272803164, 19.206833133663398, 139.62753247868756, -6.670643526710178, 30.1390834972191, -21.68131868131868]
+#eu
+n = [-33.23887052412756, 63.15543988374364, 405.17490063664627, 4.062720151368253, 55.05348343932773, -78.2483040207652]
 
-z = [a,b,c,d,e,f,g, h, j]
-labels = ['PACS', 'Gene', 'HS', 'PS', 'Conf', 'Work', 'Hosp', 'Just', 'Bab']
+z = [a,b,c,d,e,f,g, h, j, k, l, m, n]
+labels = ['PACS', 'Gene', 'HS', 'PS', 'Conf', 'Work', 'Hosp', 'Just', 'Bab', 'Sub', 'Clas', 'Enron', 'EU']
 
 
 pca = PCA(n_components=2)
@@ -51,38 +57,7 @@ for i in range(len(z)):
     ax.scatter(I[0], I[1], label=labels[i])
 
 ax.legend()
-plt.show()
-
-
-
-from scipy.cluster.hierarchy import dendrogram
-
-def plot_dendrogram(model, **kwargs):
-    # Create linkage matrix and then plot the dendrogram
-
-    # create the counts of samples under each node
-    counts = np.zeros(model.children_.shape[0])
-    n_samples = len(model.labels_)
-    for i, merge in enumerate(model.children_):
-        current_count = 0
-        for child_idx in merge:
-            if child_idx < n_samples:
-                current_count += 1  # leaf node
-            else:
-                current_count += counts[child_idx - n_samples]
-        counts[i] = current_count
-
-    linkage_matrix = np.column_stack([model.children_, model.distances_,
-                                      counts]).astype(float)
-
-    # Plot the corresponding dendrogram
-    dendrogram(linkage_matrix, **kwargs)
-
-from sklearn.cluster import AgglomerativeClustering
-
-model = AgglomerativeClustering(distance_threshold=0, n_clusters=None, affinity='cosine', linkage='average')
-model = model.fit(z)
-plot_dendrogram(model, truncate_mode='level', p=10, labels=labels)
 
 plt.show()
+plt.savefig("pca.pdf")
 
