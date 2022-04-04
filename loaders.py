@@ -1,5 +1,4 @@
 import csv, random, pandas as pd
-from networkx.generators import directed
 
 from numpy import index_exp, nan
 
@@ -817,94 +816,6 @@ def load_justice(N):
     print(count(tot))
     return edges
 
-def load_copenaghen(N):
-    import networkx as nx
-    dataset = "DatasetHigherOrder/copenaghen.csv"
-
-    fopen = open(dataset, 'r')
-    lines = fopen.readlines()
-
-    graph = {}
-    cont = 0
-    for l in lines:
-        if cont == 0:
-            cont += 1
-            continue
-
-        a, b, t, _ = l.split(',')
-        t = int(t)
-        a = int(a)
-        b = int(b)
-        if t in graph:
-            graph[t].append((a,b))
-        else:
-            graph[t] = [(a,b)]
-
-    fopen.close()
-    
-    tot = set()
-    edges = set()
-    
-    for k in graph.keys():
-        e_k = graph[k]
-        G = nx.Graph(e_k, directed=False)
-        c = list(nx.find_cliques(G))
-        for i in c:
-            i = tuple(sorted(i))
-
-            if len(i) <= N:
-                edges.add(i)
-
-            tot.add(i)
-
-    #plot_dist_hyperedges(tot, "copenaghen")
-    print(len(edges))
-    return edges
-
-def load_haggle(N):
-    import networkx as nx
-    dataset = "DatasetHigherOrder/haggle.csv"
-
-    fopen = open(dataset, 'r')
-    lines = fopen.readlines()
-
-    graph = {}
-    cont = 0
-    for l in lines:
-        if cont == 0:
-            cont += 1
-            continue
-
-        a, b, _, t= l.split(',')
-        t = int(t)
-        a = int(a)
-        b = int(b)
-        if t in graph:
-            graph[t].append((a,b))
-        else:
-            graph[t] = [(a,b)]
-
-    fopen.close()
-    
-    tot = set()
-    edges = set()
-    
-    for k in graph.keys():
-        e_k = graph[k]
-        G = nx.Graph(e_k, directed=False)
-        c = list(nx.find_cliques(G))
-        for i in c:
-            i = tuple(sorted(i))
-
-            if len(i) <= N:
-                edges.add(i)
-
-            tot.add(i)
-
-    #plot_dist_hyperedges(tot, "haggle")
-    print(len(edges))
-    print(count(tot))
-    return edges
 
 def load_babbuini(N):
     import gzip
@@ -1058,65 +969,6 @@ def load_NDC_classes(N):
     print(count(tot))
     return edges
 
-def load_DAWN(N):
-    p = "DatasetHigherOrder/DAWN/"
-    a = open(p + 'DAWN-nverts.txt')
-    b = open(p + 'DAWN-simplices.txt')
-    v = list(map(int, a.readlines()))
-    s = list(map(int, b.readlines()))
-    a.close()
-    b.close()
-
-    edges = set()
-    tot = set()
-
-    j = 0
-
-    for i in v:
-        e = []
-        LIM = j + i
-        while j < LIM:
-            e.append(s[j])
-            j += 1
-        e = tuple(sorted(e))
-        if len(e) > 1 and len(e) <= N:
-            edges.add(e)
-        tot.add(e)
-
-    #plot_dist_hyperedges(tot, "DAWN")
-    print(len(edges))
-    print(count(tot))
-    return edges
-
-def load_congress(N):
-    name = "congress-bills"
-    p = "DatasetHigherOrder/{}/".format(name)
-    a = open(p + '{}-nverts.txt'.format(name))
-    b = open(p + '{}-simplices.txt'.format(name))
-    v = list(map(int, a.readlines()))
-    s = list(map(int, b.readlines()))
-    a.close()
-    b.close()
-
-    edges = set()
-    tot = set()
-
-    for i in v:
-        cont = 0
-        e = []
-        while cont < i:
-            e.append(s.pop(0))
-            cont += 1
-        e = tuple(sorted(e))
-        if len(e) > 1 and len(e) <= N:
-            edges.add(e)
-        tot.add(e)
-
-    #plot_dist_hyperedges(tot, "{}".format(name))
-    print(len(edges))
-    print(count(tot))
-    return edges
-
 def load_eu(N):
     name = "email-Eu"
     p = "DatasetHigherOrder/{}/".format(name)
@@ -1174,79 +1026,6 @@ def load_enron(N):
     print(len(edges))
     print(count(tot))
     return edges
-
-def load_threads_ubuntu(N):
-    name = "threads-ask-ubuntu"
-    p = "DatasetHigherOrder/{}/".format(name)
-    a = open(p + '{}-nverts.txt'.format(name))
-    b = open(p + '{}-simplices.txt'.format(name))
-    v = list(map(int, a.readlines()))
-    s = list(map(int, b.readlines()))
-    a.close()
-    b.close()
-
-    edges = set()
-    tot = set()
-
-    for i in v:
-        cont = 0
-        e = []
-        while cont < i:
-            e.append(s.pop(0))
-            cont += 1
-        e = tuple(sorted(e))
-        if len(e) > 1 and len(e) <= N:
-            edges.add(e)
-        tot.add(e)
-
-    #plot_dist_hyperedges(tot, "{}".format(name))
-    print(len(edges))
-    return edges
-
-def load_threads_math(N):
-    name = "threads-math-sx"
-    p = "DatasetHigherOrder/{}/".format(name)
-    a = open(p + '{}-nverts.txt'.format(name))
-    b = open(p + '{}-simplices.txt'.format(name))
-    v = list(map(int, a.readlines()))
-    s = list(map(int, b.readlines()))
-    a.close()
-    b.close()
-
-    edges = set()
-    tot = set()
-
-    j = 0
-
-    for i in v:
-        e = []
-        LIM = j + i
-        while j < LIM:
-            e.append(s[j])
-            j += 1
-        e = tuple(sorted(e))
-        if len(e) > 1 and len(e) <= N:
-            edges.add(e)
-        tot.add(e)
-
-    #plot_dist_hyperedges(tot, "DAWN")
-    print(len(edges))
-    return edges
-
-#load_NDC_substances(3)
-
-    
-#pickle_PACS()
-#load_gene_disease(4)
-#pickle_high_school()
-#load_conference(4)
-    
-#load_DBLP(3)
-#load_PACS(3)
-
-#load_history(4)
-#load_threads_ubuntu(3)
-#load_threads_math(3)
 
 
 
