@@ -16,6 +16,8 @@ also capture evidences of structural reinforcement, a mechanism that associates 
 higher-order interactions for the nodes that interact more at the pairwise level. Our work highlights the informative power of higher-order motifs, providing a first way to extract higher-order
 fingerprints in hypergraphs at the network microscale.
 
+<img src="https://github.com/FraLotito/higher-order-motifs/blob/master/cover.png" data-canonical-src="https://github.com/FraLotito/higher-order-motifs/blob/master/cover.png" width="700" height="300" />
+
 ## Datasets
 Please download the datasets [here](https://drive.google.com/file/d/1uFaftX_hqjTiBt2SZ_6fbggYG9ySK3Ss/view?usp=sharing) and extract the archive inside the main directory.
 
