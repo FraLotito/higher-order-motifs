@@ -27,7 +27,7 @@ def motifs_order_4(edges, TOT):
 
 N = 3
 
-edges = load_primary_school(N)
+edges = load_high_school(N)
 
 output = {}
 
@@ -36,6 +36,7 @@ if N == 3:
 elif N == 4:
     output['motifs'] = motifs_order_4(edges, -1)
 
+print(output['motifs'])
 
 STEPS = len(edges)*10
 ROUNDS = 10
@@ -52,3 +53,8 @@ for i in range(ROUNDS):
     results.append(m1)
 
 output['config_model'] = results
+
+delta = diff_sum(output['motifs'], output['config_model'])
+norm_delta = norm_vector(delta)
+
+print(norm_delta)

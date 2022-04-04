@@ -125,9 +125,6 @@ def count_motifs(edges, N, TOT):
     D = {}
     for i in range(len(out)):
         D[i] = out[i][0]
-    
-    #with open('motifs_{}.pickle'.format(N), 'wb') as handle:
-    #    pickle.dump(D, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
     return out
 
@@ -135,9 +132,11 @@ N = 3
 results = []
 output = {}
 
-edges = load_primary_school(N)
+edges = load_high_school(N)
 m = count_motifs(edges, N, -1)
 output['motifs'] = m
+
+print(output['motifs'])
 
 STEPS = len(edges)*10
 ROUNDS = 10
@@ -153,3 +152,8 @@ for i in range(ROUNDS):
     results.append(m1)
 
 output['config_model'] = results
+
+delta = diff_sum(output['motifs'], output['config_model'])
+norm_delta = norm_vector(delta)
+
+print(norm_delta)
