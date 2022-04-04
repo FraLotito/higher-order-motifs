@@ -1,7 +1,10 @@
+"""
+This file implements the baseline algorithm for motif discovery in hypergraphs.
+"""
+
 from hypergraph import hypergraph
 from utils import *
 from loaders import *
-import pickle
 
 H_O = True
 L_O = []

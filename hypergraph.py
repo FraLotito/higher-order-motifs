@@ -1,4 +1,7 @@
 '''
+This file is from https://github.com/PhilChodrow/hypergraph by Phil Chodrow.
+Useful for hypergraph configuration model.
+
 An object of class hypergraph is a list of tuples on a specified node set, which can be implicit. 
 It is equipped with methods for computing hypergraph moments of interest and running Markov Chain Monte Carlo. 
 '''

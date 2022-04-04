@@ -1,3 +1,7 @@
+"""
+This file implements the efficient algorithm for motif discovery in hypergraphs.
+"""
+
 from hypergraph import hypergraph
 from utils import *
 from loaders import *
