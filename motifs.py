@@ -131,26 +131,18 @@ def count_motifs(edges, N, TOT):
 
     return out
 
-N = 4
+N = 3
 results = []
 output = {}
 
-
-#S = 1
-#edges = load_PACS_single(N, S)
-
-edges = load_PACS(N)
+edges = load_primary_school(N)
 m = count_motifs(edges, N, -1)
 output['motifs'] = m
-for c in m:
-    if c[1] > 0:
-        print(c)
-
-exit(0)
 
 STEPS = len(edges)*10
+ROUNDS = 10
 
-for i in range(-1):
+for i in range(ROUNDS):
     if not H_O:
         e1 = hypergraph(edges)
     else:
@@ -158,11 +150,6 @@ for i in range(-1):
     e1.MH(label='stub', n_steps=STEPS)
     m1 = count_motifs(e1.C, N, i)
 
-    #null_model = e1.shuffle_edges(100)
-    #m1 = count_motifs(null_model, N)
     results.append(m1)
 
 output['config_model'] = results
-
-#with open('results_classic/wiki_{}.pickle'.format(N), 'wb') as handle:
-#    pickle.dump(output, handle, protocol=pickle.HIGHEST_PROTOCOL)
