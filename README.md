@@ -4,17 +4,7 @@ This code implements the algorithms for higher-order motif analysis proposed in 
 
 ## Abstract
 
-A deluge of new data on social, technological and biological networked systems suggests that a
-large number of interactions among system units are not limited to pairs, but rather involve a higher
-number of nodes. To properly encode such higher-order interactions, richer mathematical frameworks such as hypergraphs are needed, where hyperlinks describe connections among an arbitrary
-number of nodes. Here we introduce the concept of higher-order motifs, small connected subgraphs
-where vertices may be linked by interactions of any order. We provide lower and upper bounds on
-the number of higher-order motifs as a function of the motif size, and propose an efficient algorithm
-to extract complete higher-order motif profiles from empirical data. We identify different families
-of hypergraphs, characterized by distinct higher-order connectivity patterns at the local scale. We
-also capture evidences of structural reinforcement, a mechanism that associates higher strengths of
-higher-order interactions for the nodes that interact more at the pairwise level. Our work highlights the informative power of higher-order motifs, providing a first way to extract higher-order
-fingerprints in hypergraphs at the network microscale.
+A deluge of new data on real-world networks suggests that interactions among system units are not limited to pairs, but often involve a higher number of nodes. To properly encode higher-order interactions, richer mathematical frameworks such as hypergraphs are needed, where hyperedges describe interactions among an arbitrary number of nodes. Here we systematically investigate higher-order motifs, defined as small connected subgraphs in which vertices may be linked by interactions of any order, and propose an efficient algorithm to extract complete higher-order motif profiles from empirical data. We identify different families of hypergraphs, characterized by distinct higher-order connectivity patterns at the local scale. We also propose a set of measures to study the nested structure of hyperedges and provide evidences of structural reinforcement, a mechanism that associates higher strengths of higher-order interactions for the nodes that interact more at the pairwise level. Our work highlights the informative power of higher-order motifs, providing a principled way to extract higher-order fingerprints in hypergraphs at the network microscale.
 
 <img src="https://github.com/FraLotito/higher-order-motifs/blob/master/cover.png" data-canonical-src="https://github.com/FraLotito/higher-order-motifs/blob/master/cover.png" width="700" height="300" />
 
