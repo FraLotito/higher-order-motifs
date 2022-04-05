@@ -1,6 +1,6 @@
 # Higher-order motif analysis in hypergraphs
 
-This code implements the algorithms for higher-order motif analysis proposed in - here link -
+This code implements the algorithms for higher-order motif analysis proposed in [https://www.nature.com/articles/s42005-022-00858-7](https://www.nature.com/articles/s42005-022-00858-7)
 
 ## Abstract
 
